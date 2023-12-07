@@ -46,7 +46,7 @@ const Notification = ({ user }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#B8E1FF",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#94FBAB",
     borderRadius: 5,
   },
   noNotificationsText: {
