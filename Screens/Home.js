@@ -308,9 +308,7 @@ const Home = ({ user }) => {
           <Text style={[styles.userName, { color: "#3871C1" }]}>
             {item.author || "Anonymous"}
           </Text>
-          <Text style={[styles.userName, { color: "#3871C1" }]}>
-            {item.date.split("T")[0].split("-").reverse().join("/") || "Anonymous"}
-          </Text>
+          
         </View>
       </View>
       <Text style={[styles.title, { color: "#3871C1" }]}>{item.title}</Text>
@@ -333,6 +331,9 @@ const Home = ({ user }) => {
           </TouchableOpacity>
         )}
       </View>
+      <Text style={ { color: "#3871C1",marginTop:20 }}>
+            {item.date.split("T")[0].split("-").reverse().join("/") || "Anonymous"}
+          </Text>
 
       <View style={styles.infoContainer}>
         {/* <View style={styles.statContainer}>
