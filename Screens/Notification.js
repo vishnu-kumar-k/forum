@@ -30,7 +30,7 @@ const Notification = ({ user }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.notificationItem}>
-            <Text>{item.message}</Text>
+            <Text style={styles.noNotificationsText}>{item.message}</Text>
             <Text>Date: {new Date(item.date).toLocaleString()}</Text>
           </View>
         )}
@@ -46,21 +46,23 @@ const Notification = ({ user }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#B8E1FF",
+    
     alignItems: "center",
     justifyContent: "center",
   },
   notificationItem: {
     marginBottom: 10,
     padding: 10,
-    borderWidth: 1,
+    marginTop:20,
+    backgroundColor: "#B8E1FF",
+    borderWidth: 0,
     borderColor: "#94FBAB",
-    borderRadius: 5,
+    borderRadius: 30,
   },
   noNotificationsText: {
     textAlign: "center",
     marginTop: 20,
-    fontSize: 16,
+    fontSize: 20,
     color: "#555",
   },
 });
