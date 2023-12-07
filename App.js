@@ -1,5 +1,5 @@
 // App.js
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoginScreen from "./Screens/Login";
 import { axiosPrivate } from "./axiosPrivate";
 import MyPost from "./Screens/MyPost";
-import Favourites from './Screens/Favourites';
+import Favourites from "./Screens/Favourites";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 function Root() {
@@ -83,9 +83,7 @@ function Root() {
           ),
         }}
       >
-                {() => <Home user={user} />}
-
-
+        {() => <Home user={user} />}
       </Tab.Screen>
       <Tab.Screen
         name="Favourites"
@@ -95,8 +93,7 @@ function Root() {
           ),
         }}
       >
-                        {() => <Favourites user={user} />}
-
+        {() => <Favourites user={user} />}
       </Tab.Screen>
       <Tab.Screen
         name="Upload"
@@ -119,13 +116,14 @@ function Root() {
       </Tab.Screen>
       <Tab.Screen
         name="Notification"
-        component={Notification}
         options={{
           tabBarIcon: ({ focused }) => (
             <CustomTabBarIcon focused={focused} type="Notification" />
           ),
         }}
-      />
+      >
+        {() => <Notification user={user} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

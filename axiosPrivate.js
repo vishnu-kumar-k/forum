@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL="https://forum-server-rl52.onrender.com/";
+const BASE_URL="https://mca-3mwc.onrender.com/";
 export default axios.create({
     baseURL:BASE_URL
 
