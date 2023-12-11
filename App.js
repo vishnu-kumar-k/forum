@@ -97,13 +97,15 @@ function Root() {
       </Tab.Screen>
       <Tab.Screen
         name="Upload"
-        component={Upload}
+        
         options={{
           tabBarIcon: ({ focused }) => (
             <CustomTabBarIcon focused={focused} type="Upload" />
           ),
         }}
-      />
+      >
+        {() => <Upload user={user} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Profile"
         options={{

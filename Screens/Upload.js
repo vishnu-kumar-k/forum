@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import {
   View,
   Text,
@@ -12,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as DocumentPicker from "expo-document-picker";
 import { ScrollView } from "react-native-gesture-handler";
 import * as FileSystem from "expo-file-system";
-const Upload = () => {
+const Upload = ({user}) => {
   const [title, setTitle] = useState("");
   const [headerImage, setHeaderImage] = useState("");
   const [footerImage, setFooterImage] = useState("");
@@ -26,11 +28,12 @@ const Upload = () => {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const navigation = useNavigation();
 
   const clear = () => {
     setTitle("");
     setHeaderImage("");
-    setFooterImage("");
+    
     setDescription("");
     setAuthor("");
     setError("");
@@ -47,7 +50,7 @@ const Upload = () => {
       formData.append("headerImageType", headerImageType);
       formData.append("footerImageType", footerImageType);
       formData.append("description", description);
-      formData.append("author", author);
+      formData.append("author", user.username);
       formData.append("userId", value._id);
 
       await axiosPrivate.post("blog/upload", formData, {
@@ -58,6 +61,7 @@ const Upload = () => {
 
       clear();
       setSuccess(true);
+      navigation.navigate("Profile");
     } catch (error) {
       console.log(error);
       setSuccess(false);
@@ -135,13 +139,8 @@ const Upload = () => {
           value={description}
           onChangeText={(text) => setDescription(text)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Author"
-          value={author}
-          onChangeText={(text) => setAuthor(text)}
-        />
-        <Text style={styles.titleText}>Select Header Image</Text>
+        
+        <Text style={styles.titleText}>Select Image</Text>
         <TouchableOpacity style={styles.imagePicker} onPress={selectHeaderFile}>
           <View style={styles.imagePreviewContainer}>
             {headerImage ? (
@@ -157,7 +156,7 @@ const Upload = () => {
             )}
           </View>
         </TouchableOpacity>
-        <Text style={styles.titleText}>Select Footer Image</Text>
+        {/* <Text style={styles.titleText}>Select Footer Image</Text>
         <TouchableOpacity style={styles.imagePicker} onPress={selectFooterFile}>
           <View style={styles.imagePreviewContainer}>
             {footerImage ? (
@@ -172,7 +171,7 @@ const Upload = () => {
               />
             )}
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={styles.button} onPress={handleUpload}>
           <Text style={styles.buttonText}>Upload</Text>
         </TouchableOpacity>

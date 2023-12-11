@@ -177,10 +177,10 @@ const Home = ({ user }) => {
     commentContainer: {
       flexDirection: "row", // Arrange children horizontally
       alignItems: "center",
-      backgroundColor: "#fb8b24", // Align children vertically at the center
+      backgroundColor: "#bee9e8", // Align children vertically at the center
       margin: 10,
       paddingLeft: 10,
-      marginTop:30,
+      marginTop: 30,
       borderRadius: 20,
     },
     commentInput: {
@@ -202,6 +202,7 @@ const Home = ({ user }) => {
     title: {
       fontSize: 20,
       fontWeight: "bold",
+      padding: 10,
       color: "#3871C1",
     },
     headerImage: {
@@ -210,7 +211,7 @@ const Home = ({ user }) => {
     },
     description: {
       fontSize: 16,
-      color: "#F68712",
+      color: "#02010a",
     },
     infoContainer: {
       flexDirection: "row",
@@ -229,7 +230,7 @@ const Home = ({ user }) => {
       marginRight: 10,
     },
     userName: {
-      fontSize: 16,
+      fontSize: 24,
       fontWeight: "bold",
       color: "#3871C1",
     },
@@ -250,13 +251,13 @@ const Home = ({ user }) => {
       position: "absolute",
       top: 16,
       right: 16,
-      backgroundColor: "#3871C1",
+      backgroundColor: "#5390d9",
       paddingVertical: 5,
       paddingHorizontal: 10,
       borderRadius: 5,
     },
     followButtonText: {
-      color: "#fff",
+      color: "#f9f7f3",
       fontWeight: "bold",
     },
     statContainer: {
@@ -270,6 +271,10 @@ const Home = ({ user }) => {
     commentItem: {
       flexDirection: "row",
       marginBottom: 8,
+      padding:10,
+      backgroundColor:"#b8e0d2",
+      borderRadius:10
+      
     },
     commentUsername: {
       fontWeight: "bold",
@@ -284,7 +289,7 @@ const Home = ({ user }) => {
     },
   });
   const Comment = ({ username, comment, date }) => (
-    <View style={styles.commentItem}>
+    <View style={styles.commentItem} > 
       <Text style={styles.commentUsername}>{username || "Anonymous"}:</Text>
       <Text style={styles.commentText}>{comment}</Text>
       <Text style={styles.commentDate}>
@@ -305,35 +310,37 @@ const Home = ({ user }) => {
           style={styles.profilePicture}
         />
         <View style={styles.userNameContainer}>
-          <Text style={[styles.userName, { color: "#3871C1" }]}>
+          <Text style={[styles.userName, { color: "#001219" }]}>
             {item.author || "Anonymous"}
           </Text>
-          
         </View>
       </View>
+
+      <Text style={{ color: "#333533", marginTop: 20 }}>
+        Student | Uploaded On {item.date.split("T")[0].split("-").reverse().join("/") || "Anonymous"}{" "}
+        
+      </Text>
+
       <Text style={[styles.title, { color: "#3871C1" }]}>{item.title}</Text>
-      <Image source={{ uri: item.headerImageUrl }} style={styles.headerImage} />
       <View>
         <Text
-          style={[styles.description, { color: "#F68712" }]}
+          style={[styles.description, { color: "#02010a" }]}
           numberOfLines={expanded ? undefined : 2}
         >
           {item.description}
         </Text>
         {!expanded && item.description.length > 50 && (
           <TouchableOpacity onPress={toggleDescription}>
-            <Text style={styles.expandText}>Expand</Text>
+            <Text style={{color:"#3a7ca5",padding:10}}>...see more</Text>
           </TouchableOpacity>
         )}
         {expanded && (
           <TouchableOpacity onPress={toggleDescription}>
-            <Text style={styles.expandText}>Reduce</Text>
+            <Text style={{color:"#3a7ca5",padding:10}}>...see less</Text>
           </TouchableOpacity>
         )}
       </View>
-      <Text style={ { color: "#3871C1",marginTop:20 }}>
-            {item.date.split("T")[0].split("-").reverse().join("/") || "Anonymous"}
-          </Text>
+      <Image source={{ uri: item.headerImageUrl }} style={styles.headerImage} />
 
       <View style={styles.infoContainer}>
         {/* <View style={styles.statContainer}>
@@ -390,25 +397,15 @@ const Home = ({ user }) => {
           onPress={() => toggleFollow(item.userId)}
         >
           <Text>
-            <Text style={{ color: follow[item.userId] ? "#0f0" : "#f00" }}>
+            <Text
+              style={{ color: follow[item.userId] ? "#f9f7f3" : "#f9f7f3" }}
+            >
               {follow[item.userId] ? "Following" : "Follow"}
             </Text>
           </Text>
         </TouchableOpacity>
       )}
-      {showComments && (
-        <View>
-          {/* Render your comments here */}
-          {item.comments.map((comment) => (
-            <Comment
-              key={comment._id}
-              username={comment.username}
-              comment={comment.comment}
-              date={comment.date}
-            />
-          ))}
-        </View>
-      )}
+      
       <View style={styles.commentContainer}>
         <TextInput
           style={styles.commentInput}
@@ -430,6 +427,19 @@ const Home = ({ user }) => {
           />
         </TouchableOpacity>
       </View>
+      {showComments && (
+        <View>
+          {/* Render your comments here */}
+          {item.comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              username={comment.username}
+              comment={comment.comment}
+              date={comment.date}
+            />
+          ))}
+        </View>
+      )}
     </TouchableOpacity>
   );
 
